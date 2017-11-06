@@ -7,7 +7,7 @@ Created on 2017年11月3日
 from PIL import Image 
 import win32api, win32con, win32gui  
 import os
-  
+
 def set_wallpaper_from_bmp(bmp_path):  
     # 打开指定注册表路径  
     reg_key = win32api.RegOpenKeyEx(win32con.HKEY_CURRENT_USER, "Control Panel\\Desktop", 0, win32con.KEY_SET_VALUE)  
@@ -19,12 +19,17 @@ def set_wallpaper_from_bmp(bmp_path):
     win32gui.SystemParametersInfo(win32con.SPI_SETDESKWALLPAPER, bmp_path, win32con.SPIF_SENDWININICHANGE)  
   
 def set_wallpaper(img_path):  
-    # 把图片格式统一转换成bmp格式,并放在源图片的同一目录  
-    img_dir = os.path.dirname(img_path)  
-    bmpImage = Image.open(img_path)  
-    new_bmp_path = os.path.join(img_dir, 'wallpaper.bmp')  
-    bmpImage.save(new_bmp_path, "BMP")  
-    set_wallpaper_from_bmp(new_bmp_path)  
+    isExists = os.path.exists(img_path)
+    if isExists:
+        # 把图片格式统一转换成bmp格式,并放在源图片的同一目录 
+        img_dir = os.path.dirname(img_path)  
+        bmpImage = Image.open(img_path)  
+        new_bmp_path = os.path.join(img_dir, 'wallpaper.bmp')  
+        bmpImage.save(new_bmp_path, "BMP")  
+        set_wallpaper_from_bmp(new_bmp_path)  
+        return True
+    else:
+        return False
   
 if __name__ == '__main__':  
-    set_wallpaper('G:\\2.jpg')  
+    set_wallpaper('D:/wallpaper/20171106.jpg')  
