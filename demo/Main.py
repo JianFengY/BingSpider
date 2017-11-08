@@ -47,6 +47,10 @@ class Bing(QMainWindow):
         label_1 = QLabel("     保存目录: ", self)
         label_1.setStyleSheet("QLabel{background:rgb(255,255,255,100)}")
         
+        label_2 = QLabel("公众号：麻瓜码农", self)
+        label_2.setStyleSheet("QLabel{background:rgb(255,255,255,100)}")
+        label_2.move(400,300)
+        
         path_edit = QLineEdit()
         path_edit.setText('D:/wallpaper')
         path_edit.setToolTip('抱歉！暂时不支持更换路径！')
@@ -60,14 +64,14 @@ class Bing(QMainWindow):
         self.day = 0
         
         def btn_previous(day):
-            img,self.filename = sp.show_img(sp.get_url(self.day + 1))
+            img, self.filename = sp.show_img(sp.get_url(self.day + 1))
             set_background_image(img)
             self.day += 1
             print(self.day)
         
         def btn_next(day):
             if self.day > 0:
-                img,self.filename = sp.show_img(sp.get_url(self.day - 1))
+                img, self.filename = sp.show_img(sp.get_url(self.day - 1))
                 set_background_image(img)
                 self.day -= 1
                 print(self.day)
@@ -107,6 +111,7 @@ class Bing(QMainWindow):
         grid.addWidget(button_3, 3, 1, 1, 2)
         grid.addWidget(button_4, 2, 3)
         grid.addWidget(button_5, 3, 3)
+#         grid.addWidget(label_2)
         
         grid.setAlignment(Qt.AlignTop)
         
